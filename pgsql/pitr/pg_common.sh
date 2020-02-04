@@ -4,7 +4,7 @@
 # Sourced in pg_*.sh scripts
 
 
-while [[ $# &gt; 0 ]]
+while [[ $# -gt 0 ]]
 do
     key="$1"
 
