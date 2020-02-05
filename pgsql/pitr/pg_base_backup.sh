@@ -37,4 +37,4 @@ then
     exit 3
 fi
 
-tar -czf ${CR_BASE_BACKUP_DIR}/${CR_LABEL}.tar.gz ${CR_BASE_BACKUP_DIR}/${CR_LABEL} &amp;&amp; rm -rf ${CR_BASE_BACKUP_DIR}/${CR_LABEL}
+tar -czf ${CR_BASE_BACKUP_DIR}/${CR_LABEL}.tar.gz ${CR_BASE_BACKUP_DIR}/${CR_LABEL} && rm -rf ${CR_BASE_BACKUP_DIR}/${CR_LABEL}
