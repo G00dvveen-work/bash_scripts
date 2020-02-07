@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# @author: 
+# @author: Sergey Gordin <gordin_sp@bi.group>
 # Fulfills a base backup of a PostgreSQL cluster
 
 
@@ -14,27 +14,27 @@ fi
 source "${CUR_DIR}/pg_common.sh"
 source "$CONFIG"
 
-if [[ -d ${CR_BASE_BACKUP_DIR}/${CR_LABEL} ]]
+if [[ -d ${BASE_BACKUP_DIR}/${LABEL} ]]
 then
-    echo "${CR_BASE_BACKUP_DIR}/${CR_LABEL} already exists and is not empty!"
+    echo "${BASE_BACKUP_DIR}/${LABEL} already exists and is not empty!"
     exit 2
 fi
 
 pg_basebackup \
-    --pgdata=${CR_BASE_BACKUP_DIR}/${CR_LABEL} \
+    --pgdata=${BASE_BACKUP_DIR}/${LABEL} \
     --format=plain \
     --write-recovery-conf \
     --wal-method=stream \
-    --label=${CR_LABEL} \
+    --label=${LABEL} \
     --checkpoint=fast \
     --progress \
     --verbose
 
 if [[ $? -gt 0 ]]
 then
-    rm -rf ${CR_BASE_BACKUP_DIR}/${CR_LABEL}
-    echo "pg_basebackup on ${CR_LABEL} failed!"
+    rm -rf ${BASE_BACKUP_DIR}/${LABEL}
+    echo "pg_basebackup on ${LABEL} failed!"
     exit 3
 fi
 
-tar -czf ${CR_BASE_BACKUP_DIR}/${CR_LABEL}.tar.gz ${CR_BASE_BACKUP_DIR}/${CR_LABEL} && rm -rf ${CR_BASE_BACKUP_DIR}/${CR_LABEL}
+tar -czf ${BASE_BACKUP_DIR}/${LABEL}.tar.gz ${BASE_BACKUP_DIR}/${LABEL} && rm -rf ${BASE_BACKUP_DIR}/${LABEL}
